@@ -46,7 +46,6 @@ int main()
 {
     DIR *folder;
     struct dirent *entry;
-    int files = 0;
     char* file_name;
 
     folder = opendir("data/inventory");
