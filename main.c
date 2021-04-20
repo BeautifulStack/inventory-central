@@ -48,7 +48,6 @@ int main()
     struct dirent *entry;
     int files = 0;
     char* file_name;
-    int month_nb;
 
     folder = opendir("data/inventory");
     if(folder == NULL)
@@ -62,7 +61,6 @@ int main()
     while( (entry=readdir(folder)) )
     {
         if (entry->d_type == 8) {
-            printf("File %3d: %d\n", files, entry->d_type);
             long size2;
             char* new_content;
             char* filename = malloc(sizeof(char) * 32);
@@ -77,19 +75,21 @@ int main()
             fread(new_content, 1, size2, f);
             fclose(f);
 
+            //printf("%s", new_content);
+
             if(access(file_name, F_OK) == 0) {
                 unsigned long ll = 0;
                 unsigned long size;
                 char* buffer;
                 char* buffer_final;
 
-                FILE* f = fopen(file_name, "r+");
-                fseek(f, 0,SEEK_END);
-                size = ftell(f);
-                fseek (f, 0, SEEK_SET);
+                FILE* f3 = fopen(file_name, "r+");
+                fseek(f3, 0,SEEK_END);
+                size = ftell(f3);
+                fseek (f3, 0, SEEK_SET);
                 buffer = malloc(sizeof(char) * size);
-                fread(buffer, 1, size, f);
-                fclose(f);
+                fread(buffer, 1, size, f3);
+                fclose(f3);
 
                 //printf("Size: %lu", size);
 
@@ -126,6 +126,7 @@ int main()
 
             }
             free(new_content);
+            remove(filename);
         }
     }
 
