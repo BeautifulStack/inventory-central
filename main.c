@@ -126,6 +126,7 @@ int main()
             }
             free(new_content);
             remove(filename);
+            free(filename);
         }
     }
 
