@@ -26,7 +26,7 @@ char* get_file_name(char* dir_name)
 {
     time_t now = time(NULL);
     struct tm *tm_struct = localtime(&now);
-    int month = tm_struct->tm_mon;
+    int month = tm_struct->tm_mon+1;
     char* file_name;
 
 
